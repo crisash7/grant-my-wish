@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grant My Wish 🎁</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #121212;
+      color: #fff;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #fbbc04;
+    }
+    input, textarea {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+    }
+    button {
+      background: #fbbc04;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .wish {
+      background: #1e1e1e;
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 20px;
+    }
+    .wish img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎁 Grant My Wish</h1>
+  <input id="title" placeholder="Wish title (e.g. I want pizza 🍕)" />
+  <textarea id="desc" placeholder="Why do you want this? Funny or real"></textarea>
+  <input id="upi" placeholder="Your UPI or PayPal" />
+  <input id="img" placeholder="Image URL (optional)" />
+  <button onclick="addWish()">✨ Post My Wish</button>
+
+  <div id="wishes"></div>
+
+  <script>
+    const wishes = [];
+
+    function addWish() {
+      const title = document.getElementById("title").value;
+      const desc = document.getElementById("desc").value;
+      const upi = document.getElementById("upi").value;
+      const img = document.getElementById("img").value;
+
+      if (!title || !desc || !upi) return alert("Fill all fields!");
+
+      const wishHTML = `
+        <div class="wish">
+          <h2>${title}</h2>
+          ${img ? `<img src="${img}" />` : ""}
+          <p>${desc}</p>
+          <a href="upi://pay?pa=${upi}" target="_blank">💸 Grant Wish</a>
+        </div>
+      `;
+
+      document.getElementById("wishes").innerHTML += wishHTML;
+
+      document.getElementById("title").value = "";
+      document.getElementById("desc").value = "";
+      document.getElementById("upi").value = "";
+      document.getElementById("img").value = "";
+    }
+  </script>
+</body>
+</html>
